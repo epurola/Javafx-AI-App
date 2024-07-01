@@ -3,20 +3,13 @@ import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OnnxValue;
 import ai.onnxruntime.OrtException;
 import ai.onnxruntime.OrtSession;
-
-import org.bytedeco.javacv.CanvasFrame;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoCapture;
-
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.print.DocFlavor.URL;
 
 public class EmotionDetector implements imageProcessingInterface {
   private final FaceDetector faceDetector;

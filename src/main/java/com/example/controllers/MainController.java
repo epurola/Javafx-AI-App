@@ -1,8 +1,6 @@
 package com.example.controllers;
 
 import java.io.IOException;
-
-import ai.onnxruntime.OrtException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
