@@ -1,0 +1,46 @@
+/* styles.css */
+
+/* Root style for the scene */
+.root {
+    -fx-font-family: 'Arial';
+    -fx-font-size: 14px;
+    -fx-background-color: #ffffff;
+    -fx-background-image: url("https://img.freepik.com/premium-photo/photorealistic-abstract-drawing-banner-with-teal-ink-swirling-water_899449-40279.jpg");
+    -fx-background-size: cover;
+}
+
+/* Style for the VBox layout */
+.VBox {
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
+/* Style for labels */
+.label {
+    -fx-text-fill: #030303;
+    -fx-font-weight: bold;
+}
+
+/* Style for buttons */
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 10 20;
+    -fx-border-radius: 4;
+}
+
+.button:hover {
+    -fx-background-color: #45a049;
+}
+
+.button:pressed {
+    -fx-background-color: #3e8e41;
+}
+.image-view {
+
+    -fx-preserve-ratio: true; /* Preserve aspect ratio of the image */
+    -fx-alignment: CENTER; /* Center the image in the ImageView */
+    -fx-background-color: #030303;
+}
+
+
