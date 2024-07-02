@@ -6,7 +6,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 
 import com.example.EmotionDetector;
@@ -114,11 +113,7 @@ public class EmotionController {
         }
     }
 
-    /**
-     * Get a frame from the opened video stream (if any)
-     *
-     * @return the {@link Mat} to show
-     */
+
     private Mat grabFrame() {
         // init everything
         Mat frame = new Mat();
@@ -165,19 +160,11 @@ public class EmotionController {
         }
     }
 
-    /**
-     * Update the {@link ImageView} in the JavaFX main thread
-     * 
-     * @param view the {@link ImageView} to update
-     * @param image the {@link Image} to show
-     */
+  
     private void updateImageView(ImageView view, Image image) {
         Utils.onFXThread(view.imageProperty(), image);
     }
 
-    /**
-     * On application close, stop the acquisition from the camera
-     */
     protected void setClosed() {
         this.stopAcquisition();
     }

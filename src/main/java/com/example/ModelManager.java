@@ -16,8 +16,8 @@ public class ModelManager {
     private void initializeModels() {
         try {
             // Initialize age detection model and other models
-            ageDetectionSession = loadModel("C:\\Users\\eelip\\demo\\src\\main\\resources\\vgg_ilsvrc_16_age_imdb_wiki.onnx");
-            emotionDetectionSession = loadModel("C:\\Users\\eelip\\demo\\src\\main\\resources\\emotion-ferplus-8.onnx");
+            ageDetectionSession = loadModel("src/main/resources/vgg_ilsvrc_16_age_imdb_wiki.onnx");
+            emotionDetectionSession = loadModel("src/main/resources/emotion-ferplus-8.onnx");
             // Load other models
         } catch (OrtException e) {
             e.printStackTrace();
