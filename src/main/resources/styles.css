@@ -4,43 +4,47 @@
 .root {
     -fx-font-family: 'Arial';
     -fx-font-size: 14px;
-    -fx-background-color: #ffffff;
-    -fx-background-image: url("https://img.freepik.com/premium-photo/photorealistic-abstract-drawing-banner-with-teal-ink-swirling-water_899449-40279.jpg");
-    -fx-background-size: cover;
+    -fx-background-color: #34495E;
+
 }
 
 /* Style for the VBox layout */
 .VBox {
-    -fx-padding: 20;
-    -fx-spacing: 20;
+    -fx-background-color: #2C3E50; /* Changed to a softer color */
+
+}
+.title {
+    
+    -fx-background-color: #ECF0F1; /* Changed to a softer color */
+
 }
 
 /* Style for labels */
 .label {
-    -fx-text-fill: #030303;
+    -fx-text-fill: #ECF0F1;
     -fx-font-weight: bold;
 }
 
 /* Style for buttons */
 .button {
-    -fx-background-color: #4CAF50;
-    -fx-text-fill: white;
-    -fx-padding: 10 20;
-    -fx-border-radius: 4;
+    -fx-background-color: #2C3E50;
+    -fx-text-fill: #BDC3C7;
+    -fx-text-align: left;
+    
+    
+    
 }
 
 .button:hover {
-    -fx-background-color: #45a049;
+    -fx-background-color: #202d3b;
 }
 
 .button:pressed {
-    -fx-background-color: #3e8e41;
+    -fx-background-color:#2C3E50;
 }
-.image-view {
-
+.imageView {
     -fx-preserve-ratio: true; /* Preserve aspect ratio of the image */
     -fx-alignment: CENTER; /* Center the image in the ImageView */
     -fx-background-color: #030303;
 }
-
 

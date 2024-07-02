@@ -18,6 +18,7 @@ import ai.onnxruntime.OrtSession;
 public class AgeDetector implements imageProcessingInterface {
    private final FaceDetector faceDetector;
    private ModelManager modelManager;
+   private String ageString;
 
     public AgeDetector( ModelManager modelManager) {
         String pathToXml = "src/main/resources/haarcascade_frontalface_alt2.xml"; 
@@ -34,7 +35,7 @@ public void getPrediction(Mat frame) throws OrtException {
          Mat frame2 =  processFrame(Cropped);
          int i = predictAge(frame2);
 
-         String ageString = Integer.toString(i);
+         ageString = Integer.toString(i);
          Scalar color = new Scalar(0, 255, 0); 
          int thickness = 2;
          int fontFace = Imgproc.FONT_ITALIC;
@@ -111,6 +112,11 @@ public static Mat cropFace(Mat image, Rect faceBox) {
    
 
     return resizedImage;
+    }
+
+    public String getAgeString()
+    {
+        return this.ageString;
     }
     
 }

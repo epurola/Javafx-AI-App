@@ -17,7 +17,7 @@ public class Main extends Application {
 
         // Create content
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/views/primary.fxml"));
-        Scene scene = new Scene(root, 300, 200);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(cssPath); // Apply CSS to the scene
 
         // Configure stage and show

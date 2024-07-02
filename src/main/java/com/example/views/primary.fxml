@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
+<?import de.jensd.fx.glyphs.emojione.EmojiOneView?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="348.0" prefWidth="547.0" spacing="10.0" styleClass="VBox" stylesheets="/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainController">
     <children>
-        <Button contentDisplay="TOP" onAction="#launchAgeDetection" prefHeight="37.0" prefWidth="184.0" stylesheets="/styles.css" text="Launch Age Detection">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-        <Button onAction="#launchEmotionDetection" prefHeight="37.0" prefWidth="185.0" stylesheets="/styles.css" text="Launch Emotion Detection" />
+        <VBox prefHeight="400.0" prefWidth="135.0" styleClass="vbox" stylesheets="/styles.css">
+         <children>
+                <AnchorPane prefHeight="400.0" prefWidth="166.0" styleClass="VBox" stylesheets="/styles.css">
+                    <children>
+                        <Button graphicTextGap="0.0" layoutX="-3.0" layoutY="234.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="37.0" prefWidth="158.0" styleClass="button" stylesheets="/styles.css" text="Emotion " />
+                        <Button layoutX="-3.0" layoutY="271.0" mnemonicParsing="false" onAction="#selectAgeImage" prefHeight="36.0" prefWidth="158.0" text="Age" />
+                  <Label layoutX="27.0" layoutY="79.0" text="Live Analysis" />
+                  <Label layoutX="22.0" layoutY="200.0" text="Analyze image" />
+                  <Button fx:id="button" graphicTextGap="0.0" layoutX="-2.0" layoutY="105.0" mnemonicParsing="false" onAction="#launchEmotionDetection" prefHeight="37.0" prefWidth="158.0" stylesheets="/styles.css" text="Emotion " />
+                  <Button layoutX="-2.0" layoutY="142.0" mnemonicParsing="false" onAction="#launchAgeDetection" prefHeight="36.0" prefWidth="158.0" stylesheets="/styles.css" text="Age" />
+                  <Pane layoutX="-3.0" prefHeight="79.0" prefWidth="158.0" />
+                  <EmojiOneView fill="WHITE" layoutX="26.0" layoutY="127.0" size="15" />
+                  <EmojiOneView fill="WHITE" layoutX="26.0" layoutY="257.0" size="15" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="EYE" layoutX="26.0" layoutY="294.0" size="15" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="EYE" layoutX="27.0" layoutY="164.0" size="15" />
+             
+                    </children>
+                </AnchorPane>
+         </children>
+        </VBox>
+      <VBox>
+         <children>
+            <ImageView fx:id="imageView" fitHeight="370.0" fitWidth="444.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="emotion" text="No detections" />
+         </children>
+      </VBox>
     </children>
-</VBox>
+</HBox>

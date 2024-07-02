@@ -154,6 +154,26 @@ public class Utils {
 		});
 	}
 
+    public static Mat imageToMat(Image image) {
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+        Mat mat = new Mat(height, width, CvType.CV_8UC3);
+        
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int argb = image.getPixelReader().getArgb(x, y);
+                // Extract the individual color channels
+                byte[] bgr = new byte[3];
+                bgr[0] = (byte) (argb & 0xFF);        // Blue
+                bgr[1] = (byte) ((argb >> 8) & 0xFF); // Green
+                bgr[2] = (byte) ((argb >> 16) & 0xFF);// Red
+                mat.put(y, x, bgr);
+            }
+        }
+        return mat;
+    }
+    
+
 }
 
 

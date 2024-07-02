@@ -14,6 +14,7 @@ import java.util.Map;
 public class EmotionDetector implements imageProcessingInterface {
   private final FaceDetector faceDetector;
    private ModelManager modelManager;
+   private int predictedEmotionIndex;
 
    public EmotionDetector(ModelManager modelManager) {
      String pathToXml = "src/main/resources/haarcascade_frontalface_alt2.xml"; 
@@ -47,7 +48,7 @@ public void detectEmotion(Mat frame) {
             float[][] scores = (float[][]) outputValue.getValue();
            
             // Find the predicted emotion index
-            int predictedEmotionIndex = findMaxIndex(scores);
+             predictedEmotionIndex = findMaxIndex(scores);
             
             // Get the emotion label for the predicted index
             String predictedEmotion = getEmotionLabel(predictedEmotionIndex);
@@ -114,7 +115,7 @@ public static Mat cropFace(Mat image, Rect faceBox) {
             7, "Contempt"
     );
 
-    public static String getEmotionLabel(int index) {
+    public String getEmotionLabel(int index) {
         if (emotionTable.containsKey(index)) {
             return emotionTable.get(index);
         } else {
@@ -125,6 +126,10 @@ public static Mat cropFace(Mat image, Rect faceBox) {
     public Mat processFrame(Mat frame) {
         Mat resizedImage = Utils.resizeImage(frame, 64, 64, Imgproc.INTER_AREA);
         return resizedImage;
+   }
+
+   public int getPredictedEmotionIndex() {
+       return predictedEmotionIndex;
    }
  
    

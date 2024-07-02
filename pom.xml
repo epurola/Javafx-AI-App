@@ -56,6 +56,25 @@
             <artifactId>javafx-swing</artifactId>
             <version>${javafx.version}</version>
         </dependency>
+<dependency>
+    <groupId>de.jensd</groupId>
+    <artifactId>fontawesomefx-emojione</artifactId>
+    <version>3.1.1-9.1.2</version>
+</dependency>
+<dependency>
+    <groupId>de.jensd</groupId>
+    <artifactId>fontawesomefx-commons</artifactId>
+    <version>9.1.2</version>
+</dependency>
+<dependency>
+    <groupId>de.jensd</groupId>
+    <artifactId>fontawesomefx-fontawesome</artifactId>
+    <version>4.7.0-9.1.2</version>
+</dependency>
+
+
+
+
         <dependency>
   <groupId>org.openjfx</groupId>
   <artifactId>javafx-media</artifactId>
