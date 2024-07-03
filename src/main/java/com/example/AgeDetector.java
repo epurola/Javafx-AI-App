@@ -2,6 +2,7 @@ package com.example;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.opencv.core.CvException;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -29,21 +30,40 @@ public class AgeDetector implements imageProcessingInterface {
 
 
 public void getPrediction(Mat frame) throws OrtException {
-      
-         Rect box = faceDetector.detectFaces(frame);
-         Mat Cropped = cropFace(frame, box);
-         Mat frame2 =  processFrame(Cropped);
-         int i = predictAge(frame2);
+    try {
+        // Detect faces in the frame and get the bounding box
+        Rect box = faceDetector.detectFaces(frame);
+        
+        // Crop the detected face region from the frame
+        Mat Cropped = cropFace(frame, box);
+        
+        // Process the cropped face image
+        Mat frame2 = processFrame(Cropped);
+        
+        // Predict the age from the processed frame
+        int i = predictAge(frame2);
+        
+        // Convert the predicted age to a string
+        ageString = Integer.toString(i);
+        
+        // Define text rendering parameters
+        Scalar color = new Scalar(0, 255, 0); // Green color
+        int thickness = 2;
+        int fontFace = Imgproc.FONT_ITALIC;
+        double scale = 1.0;
+        Point textOrg = new Point(350, 350); // Position to draw text
+        
+        // Put the predicted age as text on the original frame
+        Imgproc.putText(frame, ageString, textOrg, fontFace, scale, color, thickness);
+        
+    } catch (OrtException | CvException e) {
+        // Handle exceptions related to model prediction or OpenCV operations
+        System.out.print("Wrong image format");
+        Utils util = new Utils();
+        util.displayCustomAlert("Error converting the file", "Wrong file format, \n We currently only support JPG" );
+    }
+}
 
-         ageString = Integer.toString(i);
-         Scalar color = new Scalar(0, 255, 0); 
-         int thickness = 2;
-         int fontFace = Imgproc.FONT_ITALIC;
-         double scale = 1.0;
-         Point textOrg = new Point(350, 350);
-         
-         Imgproc.putText(frame, ageString, textOrg, fontFace, scale, color, thickness);
-       }
    
 
    private int predictAge(Mat frame) throws OrtException {

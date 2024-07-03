@@ -7,14 +7,21 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
-import javafx.embed.swing.SwingFXUtils;
 
+import com.example.controllers.CustomAlertController;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
 import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OrtEnvironment;
 import ai.onnxruntime.OrtException;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
@@ -163,6 +170,24 @@ public class Utils {
             }
         }
         return mat;
+    }
+    public void displayCustomAlert(String header, String content) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/views/alert.fxml"));
+            Parent root = loader.load();
+            
+            CustomAlertController controller = loader.getController();
+            controller.setAlertHeader(header);
+            controller.setAlertContent(content);
+            
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Wrong image format");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 

@@ -11,7 +11,20 @@
 /* Style for the VBox layout */
 .VBox {
     -fx-background-color: #2C3E50; /* Changed to a softer color */
+    -fx-fill-width: true;
+    -fx-fit-height: true;
+    -fx-padding: 100 0;
 
+}
+.vbox {
+   /* Changed to a softer color */
+    -fx-fill-width: true;
+    -fx-fit-height: true;
+
+}
+.HBox{
+    -fx-fill-width: true;
+    -fx-fit-height: true;
 }
 .title {
     
@@ -45,6 +58,6 @@
 .imageView {
     -fx-preserve-ratio: true; /* Preserve aspect ratio of the image */
     -fx-alignment: CENTER; /* Center the image in the ImageView */
-    -fx-background-color: #030303;
+    -fx-background-color: #636363;
 }
 

@@ -3,11 +3,21 @@ import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OnnxValue;
 import ai.onnxruntime.OrtException;
 import ai.onnxruntime.OrtSession;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import org.opencv.core.CvException;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+
+import com.example.controllers.CustomAlertController;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,10 +70,14 @@ public void detectEmotion(Mat frame) {
             double scale = 1.0;
             org.opencv.core.Point textOrg = new org.opencv.core.Point(box.x, box.y - 10); // Above the face rectangle
             Imgproc.putText(frame, predictedEmotion, textOrg, fontFace, scale, color, thickness);
-    } catch (OrtException e) {
-        e.printStackTrace();
+    } catch (OrtException | CvException e) {
+        System.out.print("Wrong image format");
+        Utils util = new Utils();
+        util.displayCustomAlert("Warning!", "Wrong file format, \n We currently only support JPG" );
+
     }
 }
+
 public static Mat cropFace(Mat image, Rect faceBox) {
     // Check for empty rectangle (no face detected)
     if (faceBox.empty()) {

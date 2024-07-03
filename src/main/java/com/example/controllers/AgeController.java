@@ -39,7 +39,7 @@ public class AgeController {
     void switchToPrimary(ActionEvent event) {
         try {
             System.out.println("Switching to Primary View...");
-            root = FXMLLoader.load(getClass().getResource("/com/example/views/primary.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/com/example/views/main.fxml"));
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
