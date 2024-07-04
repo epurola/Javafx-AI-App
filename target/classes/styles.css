@@ -4,22 +4,14 @@
 .root {
     -fx-font-family: 'Arial';
     -fx-font-size: 14px;
-    -fx-background-color: #34495E;
+    -fx-background-color: #2C3E50; 
 
 }
 
 /* Style for the VBox layout */
 .VBox {
     -fx-background-color: #2C3E50; /* Changed to a softer color */
-    -fx-fill-width: true;
-    -fx-fit-height: true;
     -fx-padding: 100 0;
-
-}
-.vbox {
-   /* Changed to a softer color */
-    -fx-fill-width: true;
-    -fx-fit-height: true;
 
 }
 .HBox{
@@ -59,5 +51,8 @@
     -fx-preserve-ratio: true; /* Preserve aspect ratio of the image */
     -fx-alignment: CENTER; /* Center the image in the ImageView */
     -fx-background-color: #636363;
+}
+.stackPane{
+    -fx-background-color: #2C3E50;
 }
 

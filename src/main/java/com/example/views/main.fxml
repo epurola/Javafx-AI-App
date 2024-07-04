@@ -11,58 +11,83 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainController">
    <left>
-      <VBox prefHeight="400.0" prefWidth="136.0" styleClass="VBox" stylesheets="/styles.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="508.0" prefWidth="141.0" styleClass="VBox" stylesheets="@../../../../resources/styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Live analysis" />
-            <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="136.0" text="Emotion">
+            <Label prefHeight="60.0" prefWidth="141.0" text="Live analysis">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="141.0" text="Emotion" onAction="#launchEmotionDetection" >
                <graphic>
-                  <EmojiOneView fill="WHITE" />
-               </graphic></Button>
-            <Button layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#launchAgeDetection" prefHeight="29.0" prefWidth="136.0" text="Age" VBox.vgrow="ALWAYS">
+                  <EmojiOneView fill="WHITE" size="15.0" />
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#launchAgeDetection" prefHeight="50.0" prefWidth="141.0" text="Age" VBox.vgrow="ALWAYS">
                <padding>
                   <Insets top="2.0" />
                </padding>
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="EYE" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="15.0" />
                </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Button>
-            <Label text="Single Image">
+            <Label prefHeight="97.0" prefWidth="141.0" text="Single Image">
                <padding>
-                  <Insets top="50.0" />
+                  <Insets left="10.0" top="50.0" />
                </padding>
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Label>
-            <Button layoutX="10.0" layoutY="139.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="29.0" prefWidth="136.0" text="Emotion">
+            <Button layoutX="10.0" layoutY="139.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="40.0" prefWidth="146.0" text="Emotion">
                <graphic>
                   <EmojiOneView fill="WHITE" />
-               </graphic></Button>
-            <Button layoutX="10.0" layoutY="168.0" mnemonicParsing="false" onAction="#selectAgeImage" prefHeight="29.0" prefWidth="136.0" text="Age">
+               </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button layoutX="10.0" layoutY="168.0" mnemonicParsing="false" onAction="#selectAgeImage" prefHeight="46.0" prefWidth="144.0" text="Age" textAlignment="CENTER" textFill="WHITE">
                <padding>
                   <Insets top="2.0" />
                </padding>
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="EYE" />
                </graphic>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Button>
          </children></VBox>
    </left>
    <center>
-      <StackPane BorderPane.alignment="CENTER">
+      <StackPane styleClass="stackPane" stylesheets="@../../../../resources/styles.css" BorderPane.alignment="CENTER">
          <children>
             <ProgressBar fx:id="loadingIndicator" prefHeight="17.0" prefWidth="248.0" progress="0.0" visible="false" />
-                  <ImageView fx:id="imageView" fitHeight="508.0" fitWidth="787.0" preserveRatio="true" />
+                  <ImageView fx:id="imageView" fitHeight="508.0" fitWidth="774.0" preserveRatio="true" />
          </children>
       </StackPane>
     </center>
    <top>
-      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="922.0" styleClass="root" stylesheets="/styles.css" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="22.0" prefWidth="922.0" styleClass="root" stylesheets="@../../../../resources/styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="emotion" prefHeight="27.0" prefWidth="95.0" stylesheets="/styles.css" text="Result" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="emotion" prefHeight="37.0" prefWidth="172.0" stylesheets="/styles.css" text="Result" textAlignment="RIGHT" wrapText="true">
                <padding>
-                  <Insets top="10.0" />
+                  <Insets left="50.0" right="10.0" />
                </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
             </Label>
          </children>
       </HBox>

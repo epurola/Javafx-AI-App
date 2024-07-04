@@ -12,7 +12,6 @@ import com.example.EmotionDetector;
 import com.example.ModelManager;
 import com.example.Utils;
 
-import ai.onnxruntime.OrtException;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -24,7 +23,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -74,7 +72,7 @@ public class MainController {
     
     }
     
-
+     //Causes some thred issue with the alert box, fix later
      @FXML
     private void selectImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -119,27 +117,43 @@ public class MainController {
         loadingIndicator.setVisible(show);
         loadingIndicator.setProgress(show ? ProgressBar.INDETERMINATE_PROGRESS : 0);
     }
-
     @FXML
-    private void selectAgeImage(ActionEvent event) throws OrtException {
+    private void selectAgeImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Image File");
-        // Set extension filter if needed
+
         File selectedFile = fileChooser.showOpenDialog(stage);
         if (selectedFile != null) {
-            try {
-                Image image = new Image(new FileInputStream(selectedFile));
-                Mat frame=Utils.imageToMat(image);
-                detectAge.getPrediction(frame);
-                Image i=Utils.mat2Image(frame);
-                System.out.print(detectAge.getAgeString());
-                emotion.setText(detectAge.getAgeString());
-                imageView.setImage(i);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                // Optionally, show an alert dialog to the user
-            }
+            // File selected, start background task
+            imageView.setImage(null);
+            Task<Void> task = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    // Show loading indicator
+                    Platform.runLater(() -> showLoadingIndicator(true));
+
+                    try {
+                        Image image = new Image(new FileInputStream(selectedFile));
+                        Mat frame = Utils.imageToMat(image);
+                        detectAge.getPrediction(frame);
+                        Image processedImage = Utils.mat2Image(frame);
+
+                        // Update UI on JavaFX Application Thread
+                        Platform.runLater(() -> {
+                            emotion.setText(detectAge.getAgeString());
+                            imageView.setImage(processedImage);
+                            showLoadingIndicator(false); // Hide loading indicator
+                        });
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    return null;
+                }
+            };
+
+            new Thread(task).start(); // Start the background task
         }
     }
-}
 
+}
