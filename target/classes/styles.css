@@ -8,6 +8,7 @@
 
 }
 
+
 /* Style for the VBox layout */
 .VBox {
     -fx-background-color: #2C3E50; /* Changed to a softer color */
@@ -48,11 +49,33 @@
     -fx-background-color:#2C3E50;
 }
 .imageView {
-    -fx-preserve-ratio: true; /* Preserve aspect ratio of the image */
-    -fx-alignment: CENTER; /* Center the image in the ImageView */
+    -fx-preserve-ratio: true; 
+    -fx-alignment: CENTER; 
     -fx-background-color: #636363;
 }
 .stackPane{
     -fx-background-color: #2C3E50;
 }
+.custom-progress-bar {
+    
+    -fx-background-color: transparent;
+    -fx-padding: 3px;
+    -fx-accent: linear-gradient(to right, #76c7c0, #4ca1af);
+}
+
+.custom-progress-bar .track {
+    -fx-background-color: #2C3E50;
+    -fx-background-radius: 5;
+}
+
+.custom-progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #76c7c0, #4ca1af);
+    -fx-background-radius: 5;
+}
+
+.custom-progress-bar .percentage {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+
 

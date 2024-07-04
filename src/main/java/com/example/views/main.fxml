@@ -24,7 +24,7 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <Button mnemonicParsing="false" prefHeight="55.0" prefWidth="141.0" text="Emotion" onAction="#launchEmotionDetection" >
+            <Button mnemonicParsing="false" onAction="#launchEmotionDetection" prefHeight="55.0" prefWidth="141.0" text="Emotion">
                <graphic>
                   <EmojiOneView fill="WHITE" size="15.0" />
                </graphic>
@@ -73,7 +73,8 @@
    <center>
       <StackPane styleClass="stackPane" stylesheets="@../../../../resources/styles.css" BorderPane.alignment="CENTER">
          <children>
-            <ProgressBar fx:id="loadingIndicator" prefHeight="17.0" prefWidth="248.0" progress="0.0" visible="false" />
+           <ProgressBar fx:id="loadingIndicator" prefHeight="17.0" prefWidth="188.0" progress="0.0" styleClass="custom-progress-bar" stylesheets="/styles.css" visible="false" />
+
                   <ImageView fx:id="imageView" fitHeight="508.0" fitWidth="774.0" preserveRatio="true" />
          </children>
       </StackPane>
