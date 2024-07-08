@@ -4,20 +4,21 @@
 .root {
     -fx-font-family: 'Arial';
     -fx-font-size: 14px;
-    -fx-background-color: #2C3E50; 
+    -fx-background-color: #367591;
 
 }
 
 
 /* Style for the VBox layout */
 .VBox {
-    -fx-background-color: #2C3E50; /* Changed to a softer color */
+    -fx-background-color: #76c7c0;/* Changed to a softer color */
     -fx-padding: 100 0;
 
 }
 .HBox{
     -fx-fill-width: true;
     -fx-fit-height: true;
+    -fx-background-color: #152744;
 }
 .title {
     
@@ -27,34 +28,39 @@
 
 /* Style for labels */
 .label {
-    -fx-text-fill: #ECF0F1;
+    -fx-text-fill: #152744;
+    -fx-text-fill: #152744;
+    -fx-font-weight: bold;
+}
+.label1 {
+    -fx-text-fill: #76c7c0;
     -fx-font-weight: bold;
 }
 
 /* Style for buttons */
 .button {
-    -fx-background-color: #2C3E50;
-    -fx-text-fill: #BDC3C7;
+    -fx-background-color: #76c7c0;
+    -fx-text-fill: #152744;
     -fx-text-align: left;
-    
-    
-    
 }
 
 .button:hover {
-    -fx-background-color: #202d3b;
+    -fx-text-fill: #ffffff;
 }
 
-.button:pressed {
-    -fx-background-color:#2C3E50;
-}
 .imageView {
     -fx-preserve-ratio: true; 
     -fx-alignment: CENTER; 
-    -fx-background-color: #636363;
+    -fx-background-color:  #367591;
 }
+.custom-alert{
+    -fx-background-color: #152744;
+    -fx-text-fill: #76c7c0;
+}
+
+
 .stackPane{
-    -fx-background-color: #2C3E50;
+    -fx-background-color:  #367591;
 }
 .custom-progress-bar {
     
@@ -76,6 +82,18 @@
 .custom-progress-bar .percentage {
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
+}
+.min-btn{
+    -fx-background-color: transparent;
+}
+.min-btn:hover{
+    -fx-background-color: #76c7c0;
+}
+.close-btn{
+    -fx-background-color: transparent;
+}
+.close-btn:hover{
+    -fx-background-color: #c77676;
 }
 
 

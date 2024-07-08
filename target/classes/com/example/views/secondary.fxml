@@ -1,21 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<VBox alignment="CENTER" prefHeight="377.0" prefWidth="604.0" stylesheets="/styles.css" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AgeController">
-    <children>
-        <Label text="Age Detection" />
-        <ImageView fx:id="currentFrame" fitHeight="347.0" fitWidth="661.0" pickOnBounds="true" preserveRatio="true" />
-        <Button fx:id="button" mnemonicParsing="false" onAction="#startCamera" stylesheets="/styles.css" text="Start Camera" />
-        <Button onAction="#switchToPrimary" stylesheets="/styles.css" text="Back" />
-    </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-</VBox>
-
-
+<BorderPane prefHeight="473.0" prefWidth="701.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.AgeController">
+   <top>
+      <HBox id="topBar" fx:id="topBar" prefHeight="23.0" prefWidth="701.0" styleClass="HBox" stylesheets="@/styles.css" BorderPane.alignment="CENTER">
+         <children>
+              <Button onAction="#switchToPrimary" prefHeight="25.0" prefWidth="62.0" styleClass="min-btn" stylesheets="/styles.css" textFill="#76c7c0">
+               <graphic>
+                  <FontAwesomeIconView fill="#76c7c0" glyphName="ARROW_LEFT" size="15" wrappingWidth="23.285714149475098" />
+               </graphic>
+            </Button>
+            <Label prefHeight="17.0" prefWidth="624.0" styleClass="bar" stylesheets="@/styles.css" text="Label" />
+            <Button mnemonicParsing="false" onAction="#minimizeApp" styleClass="min-btn" stylesheets="@/styles.css">
+               <graphic>
+                  <FontAwesomeIconView fill="#76c7c0" glyphName="MINUS" size="15" />
+               </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#closeApp" styleClass="close-btn">
+               <graphic>
+                  <FontAwesomeIconView fill="#76c7c0" glyphName="CLOSE" size="15" />
+               </graphic>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <StackPane styleClass="imageView" stylesheets="@/styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="currentFrame" fitHeight="351.0" fitWidth="483.0" pickOnBounds="true" preserveRatio="true" />
+            <FontAwesomeIconView fx:id="icon" glyphName="IMAGE" size="15" />
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="49.0" prefWidth="701.0" styleClass="imageView" stylesheets="@/styles.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="button" mnemonicParsing="false" onAction="#startCamera" text="Start Camera" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

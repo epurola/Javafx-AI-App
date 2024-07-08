@@ -14,6 +14,7 @@ import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OnnxValue;
 import ai.onnxruntime.OrtException;
 import ai.onnxruntime.OrtSession;
+import javafx.application.Platform;
 
 
 public class AgeDetector implements imageProcessingInterface {
@@ -60,7 +61,9 @@ public void getPrediction(Mat frame) throws OrtException {
         // Handle exceptions related to model prediction or OpenCV operations
         System.out.print("Wrong image format");
         Utils util = new Utils();
+        Platform.runLater(() -> {
         util.displayCustomAlert("Error converting the file", "Wrong file format, \n We currently only support JPG" );
+        });
     }
 }
 

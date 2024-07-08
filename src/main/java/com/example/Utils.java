@@ -22,9 +22,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class Utils {
 
@@ -182,6 +188,7 @@ public class Utils {
             
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Wrong image format");
             stage.setScene(new Scene(root));
             stage.showAndWait();
@@ -189,6 +196,7 @@ public class Utils {
             e.printStackTrace();
         }
     }
+    
     
 
 }

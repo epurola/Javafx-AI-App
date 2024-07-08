@@ -3,6 +3,7 @@ import ai.onnxruntime.OnnxTensor;
 import ai.onnxruntime.OnnxValue;
 import ai.onnxruntime.OrtException;
 import ai.onnxruntime.OrtSession;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -73,8 +74,9 @@ public void detectEmotion(Mat frame) {
     } catch (OrtException | CvException e) {
         System.out.print("Wrong image format");
         Utils util = new Utils();
+        Platform.runLater(() -> {
         util.displayCustomAlert("Warning!", "Wrong file format, \n We currently only support JPG" );
-
+        });
     }
 }
 

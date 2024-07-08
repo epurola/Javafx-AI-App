@@ -12,6 +12,8 @@ import com.example.AgeDetector;
 import com.example.ModelManager;
 import com.example.Utils;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class AgeController {
@@ -34,18 +37,81 @@ public class AgeController {
     private Parent root;
     private ModelManager modelManager = new ModelManager();
     private AgeDetector detectAge = new AgeDetector(modelManager);
+   
+     @FXML
+    private FontAwesomeIconView icon;
+    @FXML
+    private HBox topBar;
+
+    private double xOffSet = 0;
+    private double yOffSet = 0;
+
+    @FXML
+    private void initialize() {
+        setupDragListeners();
+    }
+
+    public void setRoot(Parent root) {
+        this.root = root;
+        setupDragListeners();
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    private void setupDragListeners() {
+        if (topBar != null) {
+            topBar.setOnMousePressed(event -> {
+                xOffSet = event.getSceneX();
+                yOffSet = event.getSceneY();
+            });
+
+            topBar.setOnMouseDragged(event -> {
+                if (stage != null) {
+                    stage.setX(event.getScreenX() - xOffSet);
+                    stage.setY(event.getScreenY() - yOffSet);
+                }
+            });
+        }
+    }
+
+     @FXML
+    private void closeApp(ActionEvent event)
+    {
+        Platform.exit();
+    }
+    @FXML
+    private void minimizeApp(ActionEvent event) {
+        if (stage != null) {
+            stage.setIconified(true); // Minimize the stage
+        }
+    }
 
     @FXML
     void switchToPrimary(ActionEvent event) {
         try {
             System.out.println("Switching to Primary View...");
-            root = FXMLLoader.load(getClass().getResource("/com/example/views/main.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/views/main.fxml"));
+            Parent root = loader.load();
+            MainController controller = loader.getController();
+            
+            // Get the current stage using the event
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            
+            // Set the stage and root in the controller
+            controller.setStage(stage);
+            controller.setRoot(root);
+            
+            // Create a new scene with the loaded root node
+            Scene scene = new Scene(root);
+            
+            // Set the new scene on the stage
             stage.setScene(scene);
             stage.show();
-            if (this.capture.isOpened())
-            {
+            
+            // Stop acquisition if necessary
+            if (this.capture.isOpened()) {
                 this.stopAcquisition();
             }
         } catch (IOException e) {
@@ -65,17 +131,13 @@ public class AgeController {
     // the id of the camera to be used
     private static int cameraId = 0;
 
-    /**
-     * The action triggered by pushing the button on the GUI
-     *
-     * @param event the push button event
-     */
+
     @FXML
     protected void startCamera(ActionEvent event) {
         if (!this.cameraActive) {
             // start the video capture
             this.capture.open(cameraId);
-
+            icon.setVisible(false);
             // is the video stream available?
             if (this.capture.isOpened()) {
                 this.cameraActive = true;
@@ -112,11 +174,7 @@ public class AgeController {
         }
     }
 
-    /**
-     * Get a frame from the opened video stream (if any)
-     *
-     * @return the {@link Mat} to show
-     */
+
     private Mat grabFrame() {
         // init everything
         Mat frame = new Mat();
@@ -141,9 +199,7 @@ public class AgeController {
         return frame;
     }
 
-    /**
-     * Stop the acquisition from the camera and release all the resources
-     */
+   
     private void stopAcquisition() {
         if (this.timer != null && !this.timer.isShutdown()) {
             try {
@@ -162,19 +218,12 @@ public class AgeController {
         }
     }
 
-    /**
-     * Update the {@link ImageView} in the JavaFX main thread
-     * 
-     * @param view the {@link ImageView} to update
-     * @param image the {@link Image} to show
-     */
+   
     private void updateImageView(ImageView view, Image image) {
         Utils.onFXThread(view.imageProperty(), image);
     }
 
-    /**
-     * On application close, stop the acquisition from the camera
-     */
+
     protected void setClosed() {
         this.stopAcquisition();
     }

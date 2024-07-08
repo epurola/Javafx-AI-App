@@ -1,6 +1,8 @@
 package com.example.controllers;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +14,8 @@ import com.example.EmotionDetector;
 import com.example.ModelManager;
 import com.example.Utils;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class EmotionController {
@@ -38,16 +43,79 @@ public class EmotionController {
     private EmotionDetector detectEmotion = new EmotionDetector(modelManager);
 
     @FXML
+    private FontAwesomeIconView icon;
+    @FXML
+    private HBox topBar;
+
+    private double xOffSet = 0;
+    private double yOffSet = 0;
+
+    @FXML
+    private void initialize() {
+        setupDragListeners();
+    }
+
+    public void setRoot(Parent root) {
+        this.root = root;
+        setupDragListeners();
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    private void setupDragListeners() {
+        if (topBar != null) {
+            topBar.setOnMousePressed(event -> {
+                xOffSet = event.getSceneX();
+                yOffSet = event.getSceneY();
+            });
+
+            topBar.setOnMouseDragged(event -> {
+                if (stage != null) {
+                    stage.setX(event.getScreenX() - xOffSet);
+                    stage.setY(event.getScreenY() - yOffSet);
+                }
+            });
+        }
+    }
+
+     @FXML
+    private void closeApp(ActionEvent event)
+    {
+        Platform.exit();
+    }
+    @FXML
+    private void minimizeApp(ActionEvent event) {
+        if (stage != null) {
+            stage.setIconified(true); // Minimize the stage
+        }
+    }
+
+    @FXML
     void switchToPrimary(ActionEvent event) {
         try {
             System.out.println("Switching to Primary View...");
-            root = FXMLLoader.load(getClass().getResource("/com/example/views/main.fxml"));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/views/main.fxml"));
+            Parent root = loader.load();
+            MainController controller = loader.getController();
+            
+            // Get the current stage using the event
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            
+            // Set the stage and root in the controller
+            controller.setStage(stage);
+            controller.setRoot(root);
+            
+            // Create a new scene with the loaded root node
+            Scene scene = new Scene(root);
+            
+            // Set the new scene on the stage
             stage.setScene(scene);
             stage.show();
-            if (this.capture.isOpened())
-            {
+            
+            // Stop acquisition if necessary
+            if (this.capture.isOpened()) {
                 this.stopAcquisition();
             }
         } catch (IOException e) {
@@ -55,6 +123,7 @@ public class EmotionController {
             // Handle exception as needed
         }
     }
+    
 
 
     // a timer for acquiring the video stream
@@ -76,6 +145,7 @@ public class EmotionController {
         if (!this.cameraActive) {
             // start the video capture
             this.capture.open(cameraId);
+            icon.setVisible(false);
 
             // is the video stream available?
             if (this.capture.isOpened()) {

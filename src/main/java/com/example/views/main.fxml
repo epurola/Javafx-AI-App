@@ -11,38 +11,44 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="922.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.MainController">
    <left>
-      <VBox prefHeight="508.0" prefWidth="141.0" styleClass="VBox" stylesheets="@../../../../resources/styles.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="508.0" prefWidth="141.0" styleClass="VBox" stylesheets="@/styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label prefHeight="60.0" prefWidth="141.0" text="Live analysis">
+            <Label prefHeight="117.0" prefWidth="141.0" text="Live analysis">
                <padding>
                   <Insets left="10.0" />
                </padding>
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <Button mnemonicParsing="false" onAction="#launchEmotionDetection" prefHeight="55.0" prefWidth="141.0" text="Emotion">
+            <Button mnemonicParsing="false" onAction="#launchEmotionDetection" prefHeight="55.0" prefWidth="141.0" stylesheets="@/styles.css" text="Emotion" textFill="#202d41">
                <graphic>
-                  <EmojiOneView fill="WHITE" size="15.0" />
+                  <EmojiOneView fill="#152744" selectionFill="#3e5e92" size="15.0" styleClass="button" />
                </graphic>
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#launchAgeDetection" prefHeight="50.0" prefWidth="141.0" text="Age" VBox.vgrow="ALWAYS">
-               <padding>
-                  <Insets top="2.0" />
-               </padding>
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="EYE" size="15.0" />
-               </graphic>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
-            <Label prefHeight="97.0" prefWidth="141.0" text="Single Image">
+            <HBox alignment="CENTER" prefHeight="71.0" prefWidth="141.0" styleClass="HBox1" VBox.vgrow="ALWAYS">
+               <children>
+                  <FontAwesomeIconView fill="#152744" glyphName="EYE" size="15.0" />
+                  <Button mnemonicParsing="false" onAction="#launchAgeDetection" prefHeight="29.0" prefWidth="54.0" text="Age" textFill="#152744">
+                     <padding>
+                        <Insets top="2.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label prefHeight="180.0" prefWidth="141.0" text="Single Image">
                <padding>
                   <Insets left="10.0" top="50.0" />
                </padding>
@@ -50,47 +56,76 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="10.0" layoutY="139.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="40.0" prefWidth="146.0" text="Emotion">
+            <Button layoutX="10.0" layoutY="139.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="55.0" prefWidth="141.0" text="Emotion">
                <graphic>
-                  <EmojiOneView fill="WHITE" />
+                  <EmojiOneView fill="#152744" />
                </graphic>
                <font>
                   <Font size="14.0" />
                </font></Button>
-            <Button layoutX="10.0" layoutY="168.0" mnemonicParsing="false" onAction="#selectAgeImage" prefHeight="46.0" prefWidth="144.0" text="Age" textAlignment="CENTER" textFill="WHITE">
-               <padding>
-                  <Insets top="2.0" />
-               </padding>
-               <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="EYE" />
-               </graphic>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
+            <HBox alignment="CENTER" fillHeight="false" prefHeight="73.0" prefWidth="141.0" styleClass="Hbox1">
+               <children>
+                  <FontAwesomeIconView fill="#152744" glyphName="EYE" size="15" />
+                  <Button alignment="BASELINE_CENTER" graphicTextGap="0.0" lineSpacing="10.0" mnemonicParsing="false" onAction="#selectAgeImage" prefHeight="38.0" prefWidth="55.0" text="Age" textAlignment="CENTER" textFill="#152744">
+                     <padding>
+                        <Insets top="2.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
          </children></VBox>
    </left>
    <center>
-      <StackPane styleClass="stackPane" stylesheets="@../../../../resources/styles.css" BorderPane.alignment="CENTER">
+      <StackPane styleClass="stackPane" stylesheets="@/styles.css" BorderPane.alignment="CENTER">
          <children>
            <ProgressBar fx:id="loadingIndicator" prefHeight="17.0" prefWidth="188.0" progress="0.0" styleClass="custom-progress-bar" stylesheets="/styles.css" visible="false" />
+            <FontAwesomeIconView fx:id="icon" fill="#152744" glyphName="IMAGE" size="25" />
+            <Label fx:id="dragLabel" contentDisplay="CENTER" prefHeight="93.0" prefWidth="355.0" text="Caution: You're about to go window-dragging! Remember, this window has feelings too, and it's not a fan of relocation therapy." visible="false" wrapText="true" />
+            <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="700.0" visible="fasle" />
+            <Button fx:id="button" contentDisplay="CENTER" mnemonicParsing="false" onAction="#closeVideo" prefHeight="36.0" prefWidth="394.0" stylesheets="@/styles.css" text="Close the video and gracefully accept defeat" visible="false" wrapText="true">
+               <StackPane.margin>
+                  <Insets top="450.0" />
+               </StackPane.margin></Button>
 
                   <ImageView fx:id="imageView" fitHeight="508.0" fitWidth="774.0" preserveRatio="true" />
          </children>
       </StackPane>
     </center>
    <top>
-      <HBox alignment="CENTER" prefHeight="22.0" prefWidth="922.0" styleClass="root" stylesheets="@../../../../resources/styles.css" BorderPane.alignment="CENTER">
+      <HBox fx:id="topBar" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="922.0" spacing="1.0" styleClass="HBox" stylesheets="@/styles.css" BorderPane.alignment="BOTTOM_CENTER">
          <children>
-            <Label fx:id="emotion" prefHeight="37.0" prefWidth="172.0" stylesheets="/styles.css" text="Result" textAlignment="RIGHT" wrapText="true">
+            <FontAwesomeIconView fill="#76c7c0" glyphName="CAMERA" size="20" />
+            <Label fx:id="emotion" prefHeight="20.0" prefWidth="415.0" styleClass="label1" stylesheets="/styles.css" text="Result" textAlignment="RIGHT" textFill="#152744" wrapText="true">
                <padding>
-                  <Insets left="50.0" right="10.0" />
+                  <Insets right="10.0" />
                </padding>
                <font>
                   <Font size="14.0" />
                </font>
+               <HBox.margin>
+                  <Insets left="440.0" />
+               </HBox.margin>
             </Label>
+            <Button graphicTextGap="0.0" mnemonicParsing="false" onAction="#minimizeApp" styleClass="min-btn">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="MINUS" size="15" styleClass="min-btn" />
+               </graphic>
+            </Button>
+            <Button graphicTextGap="0.0" mnemonicParsing="false" onAction="#closeApp" styleClass="close-btn" stylesheets="@/styles.css">
+               <graphic>
+                  <FontAwesomeIconView fill="WHITE" glyphName="CLOSE" size="15" styleClass="close-btn" />
+               </graphic>
+            </Button>
          </children>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
       </HBox>
    </top>
 </BorderPane>
