@@ -4,9 +4,12 @@ Uses opencv and onnx runtime to determine the age and emotion of the person
 
 # Example of single image analysis
 
-![image](https://github.com/epurola/Javafx-AI-App/assets/145434073/6b97325f-f703-42bb-84d7-29184c965a99)
+![image](https://github.com/epurola/Javafx-AI-App/assets/145434073/c4abc7ba-bd10-4e7e-9a59-72866195b625)
+![image](https://github.com/epurola/Javafx-AI-App/assets/145434073/7ee74543-a98f-4087-b820-5d47d9c2e098)
+
+
 
 # Example of live analysis
 
-![image](https://github.com/epurola/Javafx-AI-App/assets/145434073/0da50012-7147-4544-98b2-a7ebd9dd6dee)
+
 
