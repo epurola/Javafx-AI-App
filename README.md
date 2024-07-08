@@ -10,6 +10,8 @@ Uses opencv and onnx runtime to determine the age and emotion of the person
 
 
 # Example of live analysis
+![image](https://github.com/epurola/Javafx-AI-App/assets/145434073/15259801-4343-4b02-af60-7bb6db04eee8)
+
 
 
 
